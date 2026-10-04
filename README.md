@@ -1,0 +1,7 @@
+# Task 1 — Inconsistencies and duplicates
+
+**Name:** Yahia Hany Khattab
+**ID:** 58-1499
+**Lab:** MET 02
+
+The raw file had four kinds of problems. First, faculty, club and city were written in many ways (different case, extra spaces, short forms like "Alex" and "Pharma", full faculty names, and "Soccer" for Football). I stripped and lower-cased them, mapped the rest with explicit dictionaries, and asserted that only the allowed values remain. Second, names had extra spaces and mixed capitalisation, so I collapsed the spaces and used Title Case, while emails were trimmed and lower-cased. Third, fee_paid had nine text spellings, which I mapped to a boolean column. Fourth, signed_up_at mixed two formats; the slash format is day/month/year because its first number reaches 18 while the second is always 9, and I parsed each format separately into one datetime column. I started with 39 rows. Removing exact duplicates (same signup_id and values) removed 3, and keeping one row per student_id and club removed 4 more, leaving 32. I kept the latest submission, not the first, because students usually came back to mark the fee as paid, so the later row is the current truth. Order matters: on the raw data, duplicates on student_id and club find only 2 repeats instead of 4, because "Music" and "music", and "Debate" and "debate club", look different until spellings are fixed. Two different students are both named Mohamed Adel (55-2992 and 61-4844, with the same email), so I never deduplicated on name or email, only on student_id plus club.
